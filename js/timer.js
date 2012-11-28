@@ -1,7 +1,7 @@
 function Timer(endTime) {
   var currentTime = new Date();
   this.startTime = currentTime.getTime();
-  this.endTime = this.startTime + 154233;
+  this.endTime = endTime
   this.startingDiff = this.endTime - this.startTime
 
   this.timeRemaining = function(){
@@ -36,8 +36,6 @@ function Timer(endTime) {
       seconds = 0;
     }
 
-    //result = (hours < 10 ? "0" + hours : hours) + "-" + (minutes < 10 ? "0" + minutes : minutes) + "-" + (seconds  < 10 ? "0" + seconds : seconds);
-
     var hoursMinutesSeconds = {
       "hours": hours < 10 ? "0" + hours : hours
       ,"minutes": minutes < 10 ? "0" + minutes : minutes
@@ -49,7 +47,7 @@ function Timer(endTime) {
   this.tick = function(){
     var hoursMinutesSeconds = this.hoursMinutesSecondsRemaining();
     console.log(hoursMinutesSeconds["minutes"] + ":" + hoursMinutesSeconds["seconds"]);
-    if(timer.isReached()){
+    if(this.isReached()){
       return false;
     } else {
       return true;
