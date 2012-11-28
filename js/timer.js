@@ -1,5 +1,3 @@
-alert("loaded");
-
 function Timer(endTime) {
   var currentTime = new Date();
   this.startTime = currentTime.getTime();
@@ -56,15 +54,5 @@ function Timer(endTime) {
     } else {
       return true;
     }  
-  }
-}
-
-var timer = new Timer();
-var intervalID = setInterval(function(){tick(timer, intervalID)},1000);
-
-function tick(timer, intervalID)
-{
-  if(timer.tick() === false){
-    clearInterval(intervalID);
   }
 }
