@@ -47,11 +47,15 @@ function TimerManager() {
   };
 
   this.pauseTimer = function(){
-    this.timer.pause();
+    if(this.timer.isPaused !== true){
+      this.timer.pause();
+    }
   };
 
   this.resumeTimer = function(){
-    this.timer.resume();
+    if(this.timer.isPaused === true){
+      this.timer.resume();
+    }
   };
 
   this.stopTimer = function(){
