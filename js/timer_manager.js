@@ -40,6 +40,7 @@ function TimerManager() {
 
   this.refreshUI = function(result){
     $("h1#time").text(result.hoursMinutesSeconds.minutes + ":" + result.hoursMinutesSeconds.seconds);
+    $("#progress-bar").css("width", result.percentage+"%");
     if($("h2timer-type").text() !== this.currentTimerType){
       $("h2#timer-type").text(this.currentTimerType);
     }
@@ -115,9 +116,13 @@ function TimerManager() {
 }
 
 var tm = new TimerManager();
-tm.startPomodoroTimer();
 
 $(document).ready(function() {
+  $("#start").click(function(){
+    tm.startPomodoroTimer();
+    return false;
+  });
+
   $("#pause").click(function() {
     tm.pauseTimer();
     return false;

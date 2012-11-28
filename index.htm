@@ -6,9 +6,29 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src="js/timer.js"></script>
     <script src="js/timer_manager.js"></script>
+    <style>
+      #progress-bar-container{
+        width: 600px;
+        height: 20px;
+        border: 1px solid black;
+        border-radius: 5px;
+      }
+
+      #progress-bar{
+        height: 100%;
+        width: 0%;
+        background-color: red;
+        border-radius: 5px;
+      } 
+    </style>
   </head>  
   <body> 
-    <h1 id="time"></h1> <br />
+    <h1 id="time"></h1> 
+    <h2 id="timer-type"></h2>
+    <div id="progress-bar-container">
+      <div id="progress-bar"></div>
+    </div>
+    <a id ="start" href="#" />Start</a> </br />
     <a id ="pause" href="#" />Pause</a> </br />
     <a id="resume" href="#" />Resume</a> 
   </body> 
