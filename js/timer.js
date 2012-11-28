@@ -51,12 +51,10 @@ function Timer(endTime) {
   };
 
   this.tick = function(){
-    var hoursMinutesSeconds = this.hoursMinutesSecondsRemaining();
-    console.log(hoursMinutesSeconds.minutes + ":" + hoursMinutesSeconds.seconds);
     if(this.isReached() || this.is_stopped){
-      return false;
+      return {"running": false, "hoursMinutesSeconds": this.hoursMinutesSecondsRemaining()}
     } else {
-      return true;
+      return {"running": true, "hoursMinutesSeconds": this.hoursMinutesSecondsRemaining()}
     }  
   };
 }

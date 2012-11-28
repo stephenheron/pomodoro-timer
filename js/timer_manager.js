@@ -28,7 +28,9 @@ function TimerManager() {
 
     function tick(tm, intervalID)
     {
-      if(tm.timer.tick() === false){
+      var result = tm.timer.tick();
+      console.log(result.hoursMinutesSeconds.minutes + ":" + result.hoursMinutesSeconds.seconds);
+      if(result.running === false){
         clearInterval(intervalID);
         tm.routeTimer();  
       }
