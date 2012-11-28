@@ -3,6 +3,7 @@ function TimerManager() {
   this.pomodoroCount = 0;
   this.maxPomodoroCount = 4;
   this.currentTimerType = null;
+  this.timer = null;
 
   this.startPomodoroTimer = function(){
     console.log("Starting Pomodoro");
@@ -21,18 +22,22 @@ function TimerManager() {
 
   this.startTimer = function(endTime, type){
     this.setCurrentTimerType(type);
-    var timer = new Timer(endTime);
+    this.timer = new Timer(endTime);
     var t = this;
-    var intervalID = setInterval(function() { tick(t, timer, intervalID); }, 1000);
+    var intervalID = setInterval(function() { tick(t, intervalID); }, 1000);
 
-    function tick(tm, timer, intervalID)
+    function tick(tm, intervalID)
     {
-      if(timer.tick() === false){
+      if(tm.timer.tick() === false){
         clearInterval(intervalID);
         tm.routeTimer();  
       }
     }
   };
+
+  this.stopTimer = function(){
+    this.timer.stop(); 
+  }
 
   this.routeTimer = function(){
     if(tm.currentTimerType === "pomodoro"){
