@@ -30,6 +30,7 @@ function TimerManager() {
     {
       var result = tm.timer.tick();
       console.log(result.hoursMinutesSeconds.minutes + ":" + result.hoursMinutesSeconds.seconds);
+      $("h1#time").text(result.hoursMinutesSeconds.minutes + ":" + result.hoursMinutesSeconds.seconds);
       if(result.running === false){
         clearInterval(intervalID);
         tm.routeTimer();  
