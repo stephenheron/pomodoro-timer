@@ -47,6 +47,16 @@ function Timer(endTime) {
     }
     return hoursMinutesSeconds;
   }
+
+  this.tick = function(){
+    var hoursMinutesSeconds = this.hoursMinutesSecondsRemaining();
+    console.log(hoursMinutesSeconds["minutes"] + ":" + hoursMinutesSeconds["seconds"]);
+    if(timer.isReached()){
+      return false;
+    } else {
+      return true;
+    }  
+  }
 }
 
 var timer = new Timer();
@@ -54,10 +64,7 @@ var intervalID = setInterval(function(){tick(timer, intervalID)},1000);
 
 function tick(timer, intervalID)
 {
-  var hoursMinutesSeconds = timer.hoursMinutesSecondsRemaining();
-  console.log(hoursMinutesSeconds["minutes"] + ":" + hoursMinutesSeconds["seconds"]);
-  console.log(timer.percentageToEndTime());
-  if(timer.isReached()){
+  if(timer.tick() === false){
     clearInterval(intervalID);
   }
 }
