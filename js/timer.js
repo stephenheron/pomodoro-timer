@@ -86,6 +86,6 @@ function Timer(endTime) {
       hoursMinutesSeconds = this.hoursMinutesSecondsRemaining();
     }
   
-    return {"running": running, "paused": paused, "hoursMinutesSeconds": hoursMinutesSeconds}
+    return {"running": running, "paused": paused, "hoursMinutesSeconds": hoursMinutesSeconds, "percentage": this.percentageToEndTime()}
   };
 }
