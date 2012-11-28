@@ -89,18 +89,18 @@ function TimerManager() {
   };
 
   this.getPomodoroTime = function(){
-    //return (25 * 60) * 1000;
-    return (0.1 * 60) * 1000;
+    return (25 * 60) * 1000;
+    //return (0.1 * 60) * 1000;
   };
 
   this.getShortBreakTime = function(){
-    //return (5 * 60) * 1000;
-    return (0.1 * 60) * 1000;
+    return (5 * 60) * 1000;
+    //return (0.1 * 60) * 1000;
   };
 
   this.getLongBreakTime = function(){
-    //return (15 * 60) * 1000;
-    return (0.1 * 60) * 1000;
+    return (15 * 60) * 1000;
+    //return (0.1 * 60) * 1000;
   };
 
   this.currentTime = function(){

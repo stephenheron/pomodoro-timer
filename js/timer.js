@@ -64,14 +64,28 @@ function Timer(endTime) {
   };
 
   this.tick = function(){
-    if(this.isReached() || this.isStopped || this.isPaused){
-      if(this.isPaused){
-        return {"running": false, "paused": true, "hoursMinutesSeconds": null}
-      } else {
-        return {"running": false, "paused": false, "hoursMinutesSeconds": this.hoursMinutesSecondsRemaining()}
-      }
+    return this.buildReturnObject();  
+  };
+
+  this.buildReturnObject = function(){
+    var running = true;
+    var paused = false;
+    var hoursMinutesSeconds = null;
+
+    if(this.isReached() || this.isPaused || this.isStopped ){
+      running = false;
     } else {
-      return {"running": true, "paused": false, "hoursMinutesSeconds": this.hoursMinutesSecondsRemaining()}
-    }  
+      running = true;
+    }
+
+    if (this.isPaused){
+      paused = true;
+      hoursMinutesSeconds = null
+    } else {
+      paused = false;
+      hoursMinutesSeconds = this.hoursMinutesSecondsRemaining();
+    }
+  
+    return {"running": running, "paused": paused, "hoursMinutesSeconds": hoursMinutesSeconds}
   };
 }
