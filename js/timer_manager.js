@@ -6,17 +6,14 @@ function TimerManager() {
   this.timer = null;
 
   this.startPomodoroTimer = function(){
-    console.log("Starting Pomodoro");
     this.startTimer(this.pomodoroEndTime(), "pomodoro");
   };
 
   this.startShortBreakTimer = function(){
-    console.log("Starting Short Break");
     this.startTimer(this.shortBreakEndTime(), "short");
   };
 
   this.startLongBreakTimer = function(){
-    console.log("Starting Long Break");
     this.startTimer(this.longBreakEndTime(), "long");
   };
 
@@ -30,13 +27,21 @@ function TimerManager() {
     {
       var result = tm.timer.tick();
       console.log(result.hoursMinutesSeconds.minutes + ":" + result.hoursMinutesSeconds.seconds);
+      console.log(tm.timer.percentageToEndTime());
       if(result.hoursMinutesSeconds){
-        $("h1#time").text(result.hoursMinutesSeconds.minutes + ":" + result.hoursMinutesSeconds.seconds);
+        tm.refreshUI(result);
       }
       if(result.running === false && result.paused !== true){
         clearInterval(intervalID);
         tm.routeTimer();  
       }
+    }
+  };
+
+  this.refreshUI = function(result){
+    $("h1#time").text(result.hoursMinutesSeconds.minutes + ":" + result.hoursMinutesSeconds.seconds);
+    if($("h2timer-type").text() !== this.currentTimerType){
+      $("h2#timer-type").text(this.currentTimerType);
     }
   };
 
