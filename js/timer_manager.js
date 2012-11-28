@@ -30,17 +30,27 @@ function TimerManager() {
     {
       var result = tm.timer.tick();
       console.log(result.hoursMinutesSeconds.minutes + ":" + result.hoursMinutesSeconds.seconds);
-      $("h1#time").text(result.hoursMinutesSeconds.minutes + ":" + result.hoursMinutesSeconds.seconds);
-      if(result.running === false){
+      if(result.hoursMinutesSeconds){
+        $("h1#time").text(result.hoursMinutesSeconds.minutes + ":" + result.hoursMinutesSeconds.seconds);
+      }
+      if(result.running === false && result.paused !== true){
         clearInterval(intervalID);
         tm.routeTimer();  
       }
     }
   };
 
+  this.pauseTimer = function(){
+    this.timer.pause();
+  };
+
+  this.resumeTimer = function(){
+    this.timer.resume();
+  };
+
   this.stopTimer = function(){
     this.timer.stop(); 
-  }
+  };
 
   this.routeTimer = function(){
     if(tm.currentTimerType === "pomodoro"){
@@ -101,3 +111,15 @@ function TimerManager() {
 
 var tm = new TimerManager();
 tm.startPomodoroTimer();
+
+$(document).ready(function() {
+  $("#pause").click(function() {
+    tm.pauseTimer();
+    return false;
+  });
+
+  $("#resume").click(function() {
+    tm.resumeTimer();
+    return false;
+  });
+});

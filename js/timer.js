@@ -4,7 +4,9 @@ function Timer(endTime) {
   this.startTime = currentTime.getTime();
   this.endTime = endTime;
   this.startingDiff = this.endTime - this.startTime;
-  this.is_stopped = false;
+  this.isStopped = false;
+  this.isPaused = false;
+  this.pausedTimeRemaining = null;
 
   this.timeRemaining = function(){
     var currentTime = new Date();
@@ -21,7 +23,7 @@ function Timer(endTime) {
   };
 
   this.isReached = function(){
-    if(this.timeRemaining() < 0){
+    if(this.timeRemaining() < 0 && this.isPaused === false){
       return true;
     } else {
       return false;
@@ -29,8 +31,19 @@ function Timer(endTime) {
   };
 
   this.stop = function(){
-    this.is_stopped = true;
+    this.isStopped = true;
   };
+
+  this.pause = function(){
+    this.pausedTimeRemaining = this.timeRemaining();  
+    this.isPaused = true;    
+  };
+
+  this.resume = function(){
+    var currentTime = new Date();
+    this.endTime = (currentTime.getTime() + this.pausedTimeRemaining)
+    this.isPaused = false;
+  }
 
   this.hoursMinutesSecondsRemaining = function(){
     var totalSec = this.timeRemaining() / 1000;
@@ -51,10 +64,14 @@ function Timer(endTime) {
   };
 
   this.tick = function(){
-    if(this.isReached() || this.is_stopped){
-      return {"running": false, "hoursMinutesSeconds": this.hoursMinutesSecondsRemaining()}
+    if(this.isReached() || this.isStopped || this.isPaused){
+      if(this.isPaused){
+        return {"running": false, "paused": true, "hoursMinutesSeconds": null}
+      } else {
+        return {"running": false, "paused": false, "hoursMinutesSeconds": this.hoursMinutesSecondsRemaining()}
+      }
     } else {
-      return {"running": true, "hoursMinutesSeconds": this.hoursMinutesSecondsRemaining()}
+      return {"running": true, "paused": false, "hoursMinutesSeconds": this.hoursMinutesSecondsRemaining()}
     }  
   };
 }
