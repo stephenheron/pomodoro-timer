@@ -29,25 +29,28 @@ function TimerManager() {
     {
       if(timer.tick() === false){
         clearInterval(intervalID);
-        if(tm.currentTimerType === "pomodoro"){
-          tm.pomodoroCount++;
-          console.log(tm.pomodoroCount);
-          if(tm.pomodoroCount === 4){
-            tm.startLongBreakTimer();
-          } else {
-            tm.startShortBreakTimer();
-          }
-        } else if(tm.currentTimerType === "short"){
-          tm.startPomodoroTimer();
-        } else if(tm.currentTimerType === "long"){
-          tm.startPomodoroTimer();
-        } else {
-          tm.startShortBreakTimer();
-        }
+        tm.routeTimer();  
       }
     }
   };
 
+  this.routeTimer = function(){
+    if(tm.currentTimerType === "pomodoro"){
+      tm.pomodoroCount++;
+      console.log(tm.pomodoroCount);
+      if(tm.pomodoroCount === 4){
+        tm.startLongBreakTimer();
+      } else {
+        tm.startShortBreakTimer();
+      }
+    } else if(tm.currentTimerType === "short"){
+      tm.startPomodoroTimer();
+    } else if(tm.currentTimerType === "long"){
+      tm.startPomodoroTimer();
+    } else {
+      tm.startShortBreakTimer();
+    }
+  };
 
   this.setCurrentTimerType = function(type){
     if(type === "pomodoro" || type === "short" || type === "long"){
