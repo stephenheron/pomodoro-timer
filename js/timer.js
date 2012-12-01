@@ -1,6 +1,7 @@
 function Timer(endTime) {
   "use strict";
   var currentTime = new Date();
+  var privateThis = this;
   this.startTime = currentTime.getTime();
   this.endTime = endTime;
   this.startingDiff = this.endTime - this.startTime;
@@ -64,28 +65,28 @@ function Timer(endTime) {
   };
 
   this.tick = function(){
-    return this.buildReturnObject();  
+    return buildReturnObject();  
   };
 
-  this.buildReturnObject = function(){
+  var buildReturnObject = function(){
     var running = true;
     var paused = false;
     var hoursMinutesSeconds = null;
 
-    if(this.isReached() || this.isPaused || this.isStopped ){
+    if(privateThis.isReached() || privateThis.isPaused || privateThis.isStopped ){
       running = false;
     } else {
       running = true;
     }
 
-    if (this.isPaused){
+    if (privateThis.isPaused){
       paused = true;
       hoursMinutesSeconds = null
     } else {
       paused = false;
-      hoursMinutesSeconds = this.hoursMinutesSecondsRemaining();
+      hoursMinutesSeconds = privateThis.hoursMinutesSecondsRemaining();
     }
   
-    return {"running": running, "paused": paused, "hoursMinutesSeconds": hoursMinutesSeconds, "percentage": this.percentageToEndTime()}
+    return {"running": running, "paused": paused, "hoursMinutesSeconds": hoursMinutesSeconds, "percentage": privateThis.percentageToEndTime()}
   };
 }
