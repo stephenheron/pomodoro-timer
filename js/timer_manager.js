@@ -27,7 +27,6 @@ function TimerManager() {
     {
       var result = tm.timer.tick();
       console.log(result.hoursMinutesSeconds.minutes + ":" + result.hoursMinutesSeconds.seconds);
-      console.log(tm.timer.percentageToEndTime());
       if(result.hoursMinutesSeconds){
         tm.refreshUI(result);
       }
