@@ -14,8 +14,8 @@ function Timer(endTime) {
     return (privateThis.endTime - currentTime.getTime());
   };
 
-  this.percentageToEndTime = function(){
-    var percentage =  100 - ((timeRemaining() / this.startingDiff) * 100);
+  var percentageToEndTime = function(){
+    var percentage =  100 - ((timeRemaining() / privateThis.startingDiff) * 100);
     if (percentage > 100){
       return 100;
     } else {
@@ -87,6 +87,6 @@ function Timer(endTime) {
       hoursMinutesSeconds = privateThis.hoursMinutesSecondsRemaining();
     }
   
-    return {"running": running, "paused": paused, "hoursMinutesSeconds": hoursMinutesSeconds, "percentage": privateThis.percentageToEndTime()}
+    return {"running": running, "paused": paused, "hoursMinutesSeconds": hoursMinutesSeconds, "percentage": percentageToEndTime()}
   };
 }
