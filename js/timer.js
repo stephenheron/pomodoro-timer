@@ -9,13 +9,13 @@ function Timer(endTime) {
   this.isPaused = false;
   this.pausedTimeRemaining = null;
 
-  this.timeRemaining = function(){
+  var timeRemaining = function(){
     var currentTime = new Date();
-    return (this.endTime - currentTime.getTime());
+    return (privateThis.endTime - currentTime.getTime());
   };
 
   this.percentageToEndTime = function(){
-    var percentage =  100 - ((this.timeRemaining() / this.startingDiff) * 100);
+    var percentage =  100 - ((timeRemaining() / this.startingDiff) * 100);
     if (percentage > 100){
       return 100;
     } else {
@@ -24,7 +24,7 @@ function Timer(endTime) {
   };
 
   this.isReached = function(){
-    if(this.timeRemaining() < 0 && this.isPaused === false){
+    if(timeRemaining() < 0 && this.isPaused === false){
       return true;
     } else {
       return false;
@@ -36,7 +36,7 @@ function Timer(endTime) {
   };
 
   this.pause = function(){
-    this.pausedTimeRemaining = this.timeRemaining();  
+    this.pausedTimeRemaining = timeRemaining();  
     this.isPaused = true;    
   };
 
@@ -47,7 +47,7 @@ function Timer(endTime) {
   }
 
   this.hoursMinutesSecondsRemaining = function(){
-    var totalSec = this.timeRemaining() / 1000;
+    var totalSec = timeRemaining() / 1000;
     var hours = parseInt(totalSec / 3600, 10) % 24;
     var minutes = parseInt(totalSec / 60, 10) % 60;
     var seconds = Math.round(totalSec % 60, 10);
