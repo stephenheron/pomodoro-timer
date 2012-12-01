@@ -66,7 +66,7 @@ function TimerManager() {
     if(tm.currentTimerType === "pomodoro"){
       tm.pomodoroCount++;
       console.log(tm.pomodoroCount);
-      if(tm.pomodoroCount === 4){
+      if(tm.pomodoroCount % 4 === 0){
         tm.startLongBreakTimer();
       } else {
         tm.startShortBreakTimer();
@@ -99,18 +99,18 @@ function TimerManager() {
   };
 
   var getPomodoroTime = function(){
-    return (25 * 60) * 1000;
-    //return (0.1 * 60) * 1000;
+    //return (25 * 60) * 1000;
+    return (0.1 * 60) * 1000;
   };
 
   var getShortBreakTime = function(){
-    return (5 * 60) * 1000;
-    //return (0.1 * 60) * 1000;
+    //return (5 * 60) * 1000;
+    return (0.1 * 60) * 1000;
   };
 
   var getLongBreakTime = function(){
-    return (15 * 60) * 1000;
-    //return (0.1 * 60) * 1000;
+    //return (15 * 60) * 1000;
+    return (0.1 * 60) * 1000;
   };
 
   var currentTime = function(){
