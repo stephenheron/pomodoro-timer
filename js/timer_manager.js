@@ -1,26 +1,27 @@
 function TimerManager() {
   "use strict";
+  var privateThis = this;
   this.pomodoroCount = 0;
   this.maxPomodoroCount = 4;
   this.currentTimerType = null;
   this.timer = null;
 
   this.startPomodoroTimer = function(){
-    this.startTimer(this.pomodoroEndTime(), "pomodoro");
+    startTimer(pomodoroEndTime(), "pomodoro");
   };
 
   this.startShortBreakTimer = function(){
-    this.startTimer(this.shortBreakEndTime(), "short");
+    startTimer(shortBreakEndTime(), "short");
   };
 
   this.startLongBreakTimer = function(){
-    this.startTimer(this.longBreakEndTime(), "long");
+    startTimer(longBreakEndTime(), "long");
   };
 
-  this.startTimer = function(endTime, type){
-    this.setCurrentTimerType(type);
-    this.timer = new Timer(endTime);
-    var t = this;
+  var startTimer = function(endTime, type){
+    setCurrentTimerType(type);
+    privateThis.timer = new Timer(endTime);
+    var t = privateThis;
     var intervalID = setInterval(function() { tick(t, intervalID); }, 1000);
 
     function tick(tm, intervalID)
@@ -79,40 +80,40 @@ function TimerManager() {
     }
   };
 
-  this.setCurrentTimerType = function(type){
+  var setCurrentTimerType = function(type){
     if(type === "pomodoro" || type === "short" || type === "long"){
-      this.currentTimerType = type;
+      privateThis.currentTimerType = type;
     }
   };
 
-  this.pomodoroEndTime = function(){
-    return this.currentTime() + this.getPomodoroTime();
+  var pomodoroEndTime = function(){
+    return currentTime() + getPomodoroTime();
   };
 
-  this.shortBreakEndTime = function(){
-    return this.currentTime() + this.getShortBreakTime();
+  var shortBreakEndTime = function(){
+    return currentTime() + getShortBreakTime();
   };
 
-  this.longBreakEndTime = function(){
-    return this.currentTime() + this.getLongBreakTime();
+  var longBreakEndTime = function(){
+    return currentTime() + getLongBreakTime();
   };
 
-  this.getPomodoroTime = function(){
+  var getPomodoroTime = function(){
     return (25 * 60) * 1000;
     //return (0.1 * 60) * 1000;
   };
 
-  this.getShortBreakTime = function(){
+  var getShortBreakTime = function(){
     return (5 * 60) * 1000;
     //return (0.1 * 60) * 1000;
   };
 
-  this.getLongBreakTime = function(){
+  var getLongBreakTime = function(){
     return (15 * 60) * 1000;
     //return (0.1 * 60) * 1000;
   };
 
-  this.currentTime = function(){
+  var currentTime = function(){
     var currentTime = new Date();
     return currentTime.getTime();
   };
