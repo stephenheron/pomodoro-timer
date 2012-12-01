@@ -46,7 +46,7 @@ function Timer(endTime) {
     this.isPaused = false;
   }
 
-  this.hoursMinutesSecondsRemaining = function(){
+  var hoursMinutesSecondsRemaining = function(){
     var totalSec = timeRemaining() / 1000;
     var hours = parseInt(totalSec / 3600, 10) % 24;
     var minutes = parseInt(totalSec / 60, 10) % 60;
@@ -84,7 +84,7 @@ function Timer(endTime) {
       hoursMinutesSeconds = null
     } else {
       paused = false;
-      hoursMinutesSeconds = privateThis.hoursMinutesSecondsRemaining();
+      hoursMinutesSeconds = hoursMinutesSecondsRemaining();
     }
   
     return {"running": running, "paused": paused, "hoursMinutesSeconds": hoursMinutesSeconds, "percentage": percentageToEndTime()}
