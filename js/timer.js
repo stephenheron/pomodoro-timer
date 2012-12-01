@@ -23,7 +23,7 @@ function Timer(endTime) {
     }
   };
 
-  this.isReached = function(){
+  var isReached = function(){
     if(timeRemaining() < 0 && this.isPaused === false){
       return true;
     } else {
@@ -73,7 +73,7 @@ function Timer(endTime) {
     var paused = false;
     var hoursMinutesSeconds = null;
 
-    if(privateThis.isReached() || privateThis.isPaused || privateThis.isStopped ){
+    if(isReached() || privateThis.isPaused || privateThis.isStopped ){
       running = false;
     } else {
       running = true;
