@@ -24,7 +24,7 @@ function Timer(endTime) {
   };
 
   var isReached = function(){
-    if(timeRemaining() < 0 && this.isPaused === false){
+    if(timeRemaining() < 0 && privateThis.isPaused === false){
       return true;
     } else {
       return false;
