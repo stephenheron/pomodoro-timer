@@ -6,7 +6,39 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src="js/timer.js"></script>
     <script src="js/timer_manager.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.7.3/build/cssreset/cssreset-min.css">
     <style>
+
+      html {
+        background-color: #F0F0F0;
+      }
+      body {
+        background-color: #F0F0F0;
+        font-family: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif
+      }
+
+      #header {
+        background-color: #D91828;
+        width: 100%;
+        height: 40px;
+        border-bottom: 1px solid #D91828;
+      }
+
+      #container {
+        width: 960px;
+        height: 400px;
+        margin: 0px auto;
+        background-color: white;
+        margin-top: 40px;
+      }
+
+      #timer-container {
+        margin: 15px;
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid #CBCAC9;
+      }
+
       #progress-bar-container{
         width: 600px;
         height: 20px;
@@ -23,13 +55,18 @@
     </style>
   </head>  
   <body> 
-    <h1 id="time"></h1> 
-    <h2 id="timer-type"></h2>
-    <div id="progress-bar-container">
-      <div id="progress-bar"></div>
+    <div id="container">
+      <div id="header"></div>
+      <div id="timer-container">
+        <h1 id="time"></h1> 
+        <h2 id="timer-type"></h2>
+        <div id="progress-bar-container">
+          <div id="progress-bar"></div>
+        </div>
+        <a id ="start" href="#" />Start</a> </br />
+        <a id ="pause" href="#" />Pause</a> </br />
+        <a id="resume" href="#" />Resume</a> 
+      </div>
     </div>
-    <a id ="start" href="#" />Start</a> </br />
-    <a id ="pause" href="#" />Pause</a> </br />
-    <a id="resume" href="#" />Resume</a> 
   </body> 
 </html>
