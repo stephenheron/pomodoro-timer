@@ -9,13 +9,11 @@
     <script src="js/bootstrap.js"></script>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <style>
-
       html {
         background-color: #F0F0F0;
       }
       body {
         background-color: #F0F0F0;
-        font-family: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif
       }
 
       #header {
@@ -27,7 +25,7 @@
 
       #container {
         width: 960px;
-        height: 400px;
+        height: 100%;
         margin: 0px auto;
         background-color: white;
         margin-top: 40px;
@@ -38,10 +36,12 @@
         padding: 5px;
         border-radius: 5px;
         border: 1px solid #CBCAC9;
+        text-align: center;
       }
 
       #progress-bar-container{
-        width: 600px;
+        width: 90%;
+        margin: 0px auto;
         height: 20px;
         border: 1px solid black;
         border-radius: 5px;
@@ -50,8 +50,35 @@
       #progress-bar{
         height: 100%;
         width: 0%;
-        background-color: red;
         border-radius: 5px;
+      }
+
+      #progress-bar.pomodoro{
+        background-color:red;
+      }
+
+      #progress-bar.short{
+        background-color:blue;
+      }
+
+      #progress-bar.long{
+        background-color:green;
+      }
+
+      #timer-actions{
+        margin-top: 8px;
+      }
+
+      #timer-options{
+        margin: 0px auto;
+        margin-top: 10px;
+        width: 400px;
+        height: 100%;
+        border: 1px solid #CBCAC9;
+        border-radius: 5px;
+        display: none;
+        text-align: left;
+        padding: 5px;
       } 
     </style>
   </head>  
@@ -59,14 +86,27 @@
     <div id="container">
       <div id="header"></div>
       <div id="timer-container">
-        <h1 id="time"></h1> 
-        <h2 id="timer-type"></h2>
+        <h1 id="time">00:00</h1> 
+        <h2 id="timer-type">Pomodoro</h2>
         <div id="progress-bar-container">
           <div id="progress-bar"></div>
         </div>
-        <a id ="start" href="#" />Start</a> </br />
-        <a id ="pause" href="#" />Pause</a> </br />
-        <a id="resume" href="#" />Resume</a> 
+         <div id="timer-actions">
+          <a id ="start" class="btn btn-primary" href="#" />Start</a>
+          <a id ="pause" class="btn" href="#" />Pause</a>
+        </div>
+        <a id="timer-options-toggle" href="#" />Timer options</a>
+        <form id="timer-options">
+            <fieldset>
+              <legend>Timer options</legend>
+              <label>Pomodoro length </label>
+              <input id="pomodoro-time" type="text" placeholder="25 minutes">
+              <label>Short break length </label>
+              <input id="short-break-time" type="text" placeholder="3 minutes">
+              <label>Long break length </label>
+              <input id="long-break-time" type="text" placeholder="15 minutes">
+            </fieldset>
+        </div>
       </div>
     </div>
   </body> 

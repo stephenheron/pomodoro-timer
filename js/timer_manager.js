@@ -27,7 +27,6 @@ function TimerManager() {
     function tick(tm, intervalID)
     {
       var result = tm.timer.tick();
-      console.log(result.hoursMinutesSeconds.minutes + ":" + result.hoursMinutesSeconds.seconds);
       if(result.hoursMinutesSeconds){
         tm.refreshUI(result);
       }
@@ -42,7 +41,19 @@ function TimerManager() {
     $("h1#time").text(result.hoursMinutesSeconds.minutes + ":" + result.hoursMinutesSeconds.seconds);
     $("#progress-bar").css("width", result.percentage+"%");
     if($("h2timer-type").text() !== this.currentTimerType){
-      $("h2#timer-type").text(this.currentTimerType);
+      if(this.currentTimerType === "pomodoro"){
+        $("h2#timer-type").text("Pomodoro");
+        $("#progress-bar").removeClass();
+        $("#progress-bar").addClass("pomodoro");
+      } else if (this.currentTimerType === "short"){
+        $("#progress-bar").removeClass();
+        $("#progress-bar").addClass("short");
+        $("h2#timer-type").text("Short Break");
+      } else if (this.currentTimerType === "long"){
+        $("#progress-bar").removeClass();
+        $("#progress-bar").addClass("long");
+        $("h2#timer-type").text("Long Break");
+      }
     }
   };
 
@@ -99,17 +110,26 @@ function TimerManager() {
   };
 
   var getPomodoroTime = function(){
-    //return (25 * 60) * 1000;
-    return (0.1 * 60) * 1000;
+    var time = $("#pomodoro-time").val();
+    if(validateTime(time) === false){
+      time = 25;
+    }
+    return (time * 60) * 1000;
   };
 
   var getShortBreakTime = function(){
-    //return (5 * 60) * 1000;
-    return (0.1 * 60) * 1000;
+    var time = $("#short-break-time").val();
+    if(validateTime(time) === false){
+      time = 5;
+    }
+    return (time * 60) * 1000;
   };
 
   var getLongBreakTime = function(){
-    //return (15 * 60) * 1000;
+    var time = $("#long-break-time").val();
+    if(validateTime(time) === false){
+      time = 15;
+    }
     return (0.1 * 60) * 1000;
   };
 
@@ -117,23 +137,45 @@ function TimerManager() {
     var currentTime = new Date();
     return currentTime.getTime();
   };
+
+  var validateTime = function(time){
+    if(time === null || isNaN(time) || time === ""){
+      return false;
+    } else {
+      return true;
+    }
+  }
 }
 
 var tm = new TimerManager();
 
 $(document).ready(function() {
   $("#start").click(function(){
-    tm.startPomodoroTimer();
+    if(tm.timer === null){
+      $("#start").addClass("disabled");
+      tm.startPomodoroTimer();
+    }
+
+    if(tm.timer.isPaused){
+      tm.resumeTimer();
+      $("#start").text("Start");
+      $("#pause").removeClass("disabled");
+    }
+
     return false;
   });
 
   $("#pause").click(function() {
-    tm.pauseTimer();
+    if(tm.timer.isPaused !== true){
+      $("#pause").addClass("disabled");
+      $("#start").text("Resume");
+      $("#start").removeClass("disabled");
+      tm.pauseTimer();
+    }
     return false;
   });
 
-  $("#resume").click(function() {
-    tm.resumeTimer();
-    return false;
+  $("#timer-options-toggle").click(function() {
+    $("#timer-options").toggle();
   });
 });
