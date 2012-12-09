@@ -5,7 +5,6 @@ function Timer(endTime) {
   this.startTime = currentTime.getTime();
   this.endTime = endTime;
   this.startingDiff = this.endTime - this.startTime;
-  this.isStopped = false;
   this.isPaused = false;
   this.pausedTimeRemaining = null;
 
@@ -29,10 +28,6 @@ function Timer(endTime) {
     } else {
       return false;
     }
-  };
-
-  this.stop = function(){
-    this.isStopped = true;
   };
 
   this.pause = function(){
@@ -73,7 +68,7 @@ function Timer(endTime) {
     var paused = false;
     var hoursMinutesSeconds = null;
 
-    if(isReached() || privateThis.isPaused || privateThis.isStopped ){
+    if(isReached() || privateThis.isPaused){
       running = false;
     } else {
       running = true;

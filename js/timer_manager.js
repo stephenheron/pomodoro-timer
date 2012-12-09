@@ -72,8 +72,8 @@ function TimerManager() {
     }
   };
 
-  this.stopTimer = function(){
-    this.timer.stop(); 
+  this.resetTimer = function(){
+    this.startPomodoroTimer(); 
   };
 
   this.routeTimer = function(){
@@ -176,6 +176,10 @@ $(document).ready(function() {
       tm.pauseTimer();
     }
     return false;
+  });
+
+  $("#reset").click(function() {
+    tm.resetTimer();
   });
 
   $("#timer-options-toggle").click(function() {
