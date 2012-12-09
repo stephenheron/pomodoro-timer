@@ -41,6 +41,9 @@ function TimerManager() {
     $("h2#time").text(result.hoursMinutesSeconds.minutes + ":" + result.hoursMinutesSeconds.seconds);
     $("#progress-bar").css("width", result.percentage+"%");
     if($("h2timer-type").text() !== this.currentTimerType){
+      if(result.percentage === 100){
+        $("#alert").get(0).play();
+      }
       if(this.currentTimerType === "pomodoro"){
         $("h2#timer-type").text("Pomodoro");
         $("#progress-bar").removeClass();
