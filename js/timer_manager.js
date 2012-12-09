@@ -38,7 +38,7 @@ function TimerManager() {
   };
 
   this.refreshUI = function(result){
-    $("h1#time").text(result.hoursMinutesSeconds.minutes + ":" + result.hoursMinutesSeconds.seconds);
+    $("h2#time").text(result.hoursMinutesSeconds.minutes + ":" + result.hoursMinutesSeconds.seconds);
     $("#progress-bar").css("width", result.percentage+"%");
     if($("h2timer-type").text() !== this.currentTimerType){
       if(this.currentTimerType === "pomodoro"){
